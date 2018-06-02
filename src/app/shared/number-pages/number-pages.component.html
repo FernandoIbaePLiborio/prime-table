@@ -1,0 +1,10 @@
+<div class="col-sm-6" style="margin-top: -33px;padding: 6px;">
+  <p class="form-group" style="display: inline;">Páginas:</p>
+  <div *ngFor="let option of options" style="display: inline;">
+    <button (click)="setValue(option.numero)" type="button" class="btn btn-link">
+      <label>
+        {{option.numero}}
+      </label>
+    </button>
+  </div>
+</div>

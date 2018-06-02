@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col-lg-6">
+    <nav aria-label="Pagination" *ngIf="maxPages > 1">
+      <ul class="pagination">
+        <li [class.disabled]="current == 1">
+          <a href="javascript:;"
+             (click)="setPage(current-1, itemsPerPage)"
+             aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+        <li *ngFor="let page of pages;" [class.active]="page == current">
+          <a href="javascript:;" (click)="setPage(page, itemsPerPage)">{{ page }}</a>
+        </li>
+        <li [class.disabled]="current == maxPages">
+          <a href="javascript:;" (click)="setPage(current+1 ,itemsPerPage)" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div class="col-lg-6 text-right per-page">
+    <nav aria-label="Anzahl der Beiträge pro Seite">
+      <p>Anzahl der Beiträge pro Seite:</p>
+      <ul class="pagination">
+        <li *ngFor="let perPage of postsPerPage;" [class.active]="perPage == itemsPerPage">
+          <a href="javascript:;" (click)="setPage(current, perPage)">{{ perPage }}</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
