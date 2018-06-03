@@ -32,16 +32,24 @@ export class AppComponent {
   ngOnInit() {
     this.carService.getCarsSmall().subscribe(cars => this.cars = cars);
   }
+
   pageChanged(event: LazyLoadEvent) {
     console.log(event);
     this.loadPage(event.first / event.rows + 1, event.rows);
   }
 
-  setValue(n: number) {
+  setPage(n: any) {
+    this.dataTable.reset();
     let paging = {
       first: ((n - 1) * this.dataTable.rows),
       rows: this.dataTable.rows
     };
+    this.dataTable.first = paging.first;
+    this.dataTable.paginate();
+  }
+
+  setRows(n: number) {
+    this.dataTable.reset();
     this.dataTable.rows = n;
     this.dataTable.paginate();
   }
@@ -50,7 +58,6 @@ export class AppComponent {
     let params = new URLSearchParams();
     params.set('page', page.toString());
     params.set('rows', rows.toString());
-
     this.carService.getCarsSmall().subscribe(cars => this.cars = cars),
       error => {
         console.log(error);
