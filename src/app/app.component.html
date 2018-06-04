@@ -14,7 +14,24 @@
     <ng-template pTemplate="emptymessage">
       Não há registros.
     </ng-template>
-
+    <p-header>
+      <table class="table table-striped tabela" style="width:100%">
+        <caption style="width:100%">BASELINES</caption>
+        <thead>
+          <tr class="tabela-acoes">
+            <td colspan="12">
+              <div class="row">
+                <div class="col-md-12">
+                  <a href="javascript:void(0)" title="XLS"><i class="fa fa-file-excel-o" aria-hidden="true"></i></a>
+                  &nbsp;
+                  <a href="javascript:void(0)" title="PDF"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </thead>
+      </table>
+    </p-header>
     <p-column field="vin" header="Vin"></p-column>
     <p-column field="year" header="Year"></p-column>
     <p-column field="brand" header="Brand"></p-column>

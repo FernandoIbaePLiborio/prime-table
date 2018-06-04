@@ -1148,6 +1148,7 @@ fieldset.alternativo legend, fieldset.alternativo h2 {
 
 .tabela-acoes {
   background-color: #d1e5b6;
+  text-align: right;
 }
 
 /* 2.7.8 COR ALTERNATIVA DA TABELA */
@@ -3292,11 +3293,7 @@ a.disabled, .pagination>li>a.disabled {
 }
 
 .ui-datatable .ui-datatable-header {
-  background: #d1e5b6 !important;
-  height: 25px;
-  position: absolute;
-  width: 100%;
-  text-align: left;
+  padding: 0px;
 }
 
 .ui-datatable .ui-datatable-thead>tr>th {
@@ -3318,8 +3315,8 @@ a.disabled, .pagination>li>a.disabled {
 
 .ui-datatable .ui-paginator-top {
   background: #fff !important;
-  margin-top: 7.3px !important;
   margin-left: 37% !important;
+  margin-top: -87px;
 }
 
 .ui-datatable tbody>tr.ui-widget-content.ui-datatable-odd {
@@ -3490,7 +3487,7 @@ a.disabled, .pagination>li>a.disabled {
 }
 
 .paginador {
-  margin-top: 13px;
+  margin-top: 10px;
   position: absolute;
   z-index: 1;
 }
@@ -3503,10 +3500,9 @@ a.disabled, .pagination>li>a.disabled {
 /* Pesquisa Paginador */
 
 .pesquisa-paginador-top {
-  position: absolute;
-  z-index: 1;
   margin-left: 80.8%;
   text-align: -moz-right;
+  margin-bottom: 8px;
 }
 
 .pesquisa-paginador-bottom {
@@ -3525,8 +3521,11 @@ a.disabled, .pagination>li>a.disabled {
   margin-left: 10px;
 }
 
-.input-pesquisar-pagina-top {
-  margin-top: 8px;
+.barra-acoes {
+  background: #d1e5b6 !important;
+  height: 25px;
+  width: 100%;
+  text-align: right;
 }
 
 p-datatable {
