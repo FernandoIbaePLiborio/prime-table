@@ -4,7 +4,7 @@ import { Component, ViewChild, Output } from '@angular/core';
 import { DataTableModule, DataTable } from 'primeng/components/datatable/datatable';
 import { CarService } from './app.component.service';
 import { Car } from './app.model';
-import { LazyLoadEvent } from 'primeng/primeng';
+import { LazyLoadEvent, SortEvent } from 'primeng/primeng';
 import { Observable } from 'rxjs'
 import { NumberPages } from './shared/number-pages/number-pages.model';
 import { Paginador, Page } from './paginador/paginador.model';
@@ -21,6 +21,9 @@ export class AppComponent {
   cars: Car[];
   paginador: Paginador;
 
+  first: number;
+  rows: number;
+
   numberPages: NumberPages[] = [
     { numero: 10 },
     { numero: 50 },
@@ -35,7 +38,14 @@ export class AppComponent {
 
   pageChanged(event: LazyLoadEvent) {
     console.log(event);
-    this.loadPage(event.first / event.rows + 1, event.rows);
+    this.first = event.first;
+    this.rows = event.rows;
+    this.loadPage(this.first / this.rows + 1, this.rows);
+  }
+
+  pageSort(event: SortEvent){
+    console.log(event);
+    this.loadPage(this.first / this.rows + 1, this.rows);
   }
 
   setPage(n: any) {
@@ -45,7 +55,6 @@ export class AppComponent {
       rows: this.dataTable.rows
     };
     this.dataTable.first = paging.first;
-    this.dataTable.paginate();
   }
 
   setRows(n: number) {
@@ -55,6 +64,7 @@ export class AppComponent {
   }
 
   loadPage(page: number, rows: number) {
+    console.log('teste');
     let params = new URLSearchParams();
     params.set('page', page.toString());
     params.set('rows', rows.toString());
