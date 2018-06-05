@@ -8,8 +8,11 @@ export class CarService {
 
     constructor(private http: HttpClient) { }
 
-    getCarsSmall() {
+    getCarsSmall(page?: string, rows?: string, field?: string) {
         let params: HttpParams = undefined
+        if (page || rows){
+            params = new HttpParams().set('p', page).set('r', rows)
+        }
         return this.http.get<Car[]>(`${'http://localhost:3000'}/data`, {params: params})
     }
 }

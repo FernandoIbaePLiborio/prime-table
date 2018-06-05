@@ -4,10 +4,10 @@ import { Component, ViewChild, Output } from '@angular/core';
 import { DataTableModule, DataTable } from 'primeng/components/datatable/datatable';
 import { CarService } from './app.component.service';
 import { Car } from './app.model';
-import { LazyLoadEvent, SortEvent } from 'primeng/primeng';
+import {LazyLoadEvent, SortEvent} from 'primeng/primeng';
 import { Observable } from 'rxjs'
 import { NumberPages } from './shared/number-pages/number-pages.model';
-import { Paginador, Page } from './paginador/paginador.model';
+import { Paginador, Page, ConsultaFiltro } from './paginador/paginador.model';
 import { EventEmitter } from 'events';
 
 @Component({
@@ -20,6 +20,7 @@ export class AppComponent {
   @ViewChild(DataTable) dataTable: DataTable;
   cars: Car[];
   paginador: Paginador;
+  filtro: ConsultaFiltro;
 
   first: number;
   rows: number;
@@ -37,15 +38,15 @@ export class AppComponent {
   }
 
   pageChanged(event: LazyLoadEvent) {
-    console.log(event);
-    this.first = event.first;
-    this.rows = event.rows;
+    this.first = this.dataTable.first;
+    this.rows = this.dataTable.rows;
     this.loadPage(this.first / this.rows + 1, this.rows);
   }
 
   pageSort(event: SortEvent){
-    console.log(event);
-    this.loadPage(this.first / this.rows + 1, this.rows);
+    this.dataTable.sortField = event.field; 
+    this.dataTable.sortOrder = event.order; 
+    this.dataTable.paginate();
   }
 
   setPage(n: any) {
@@ -58,7 +59,6 @@ export class AppComponent {
   }
 
   setRows(n: number) {
-    this.dataTable.reset();
     this.dataTable.rows = n;
     this.dataTable.paginate();
   }
@@ -68,7 +68,7 @@ export class AppComponent {
     let params = new URLSearchParams();
     params.set('page', page.toString());
     params.set('rows', rows.toString());
-    this.carService.getCarsSmall().subscribe(cars => this.cars = cars),
+    this.carService.getCarsSmall(params.get('page'), params.get('rows')).subscribe(cars => this.cars = cars),
       error => {
         console.log(error);
       };
