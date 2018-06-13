@@ -1,4 +1,3 @@
-import { ConsultaFiltro } from './paginador.model';
 class Paginador {
     constructor(
         public TotalItems: 100,
@@ -17,6 +16,12 @@ class ConsultaFiltro {
     limit: number; 
     sortField: string; 
     desc: boolean;
+    field: string;
+    param: string;
+    vin?: string;
+    year?: string;
+    brand?: string;
+    color?: string;
 }
 
 class Page {

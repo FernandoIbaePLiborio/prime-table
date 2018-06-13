@@ -1,53 +1,73 @@
-<div class="col-sm-12">
-  <div class="paginador">
-    <p class="form-group label-paginador" style="display: inline;">Resultados Por Página:</p>
-    <a *ngFor="let option of numberPages" style="display: inline;" (click)="setRows(option.numero)" class="link">
-      {{option.numero}}
-    </a>
+
+<section class="content-header">
+  <!-- barra de busca -->
+  <div class="row">
+    <form [formGroup]="searchForm">
+      <div class="form-group">
+        <input type="text" #iptSearch formControlName="searchControl"
+                class="form-control" placeholder="O que você está procurando?" />
+      </div>
+      <button type="button" (click)="confirm()" label="Confirma"></button>
+    <button type="button" class="btn btn-primary"  (click)="clickMethod('name')">Delete me</button>
+    <button type="button" (click)="downloadPDF()">Download</button>
+    <p-confirmDialog header="Confirmação" icon="pi pi-exclamation-triangle" width="425"></p-confirmDialog>
+
+    <div class="col-sm-12">
+      <div class="paginador">
+        <p class="form-group label-paginador" style="display: inline;">Resultados Por Página:</p>
+        <a *ngFor="let option of numberPages" style="display: inline;" (click)="setRows(option.numero)" class="link">
+          {{option.numero}}
+        </a>
+      </div>
+      <div class="pesquisa-paginador-top">
+        <p class="form-group label-paginador" style="display: inline;">Ir para a página: </p>
+        <input #pageTop type="text" class="input-pesquisar-pagina-top form-control" (keyup.enter)="setPage(pageTop.value)" />
+      </div>
+      <div>
+        
+      </div>
+      <p-dataTable #dataTable [paginatorPosition]="'both'" [editable]="true" [responsive]="true" [pageLinks]="10" [lazy]="true" [value]="cars" [rows]="10"
+        [paginator]="true" [style]="{'width':'100%'}" (onSort)="pageSort($event)" (onFilter)="setFilter($event)" (onPage)="pageChanged($event)">
+        <ng-template pTemplate="emptymessage">
+          Não há registros.
+        </ng-template>
+        <p-header>
+          <table class="table table-striped tabela" style="width:100%">
+            <caption style="width:100%">BASELINES</caption>
+            <thead>
+              <tr class="tabela-acoes">
+                <td colspan="12">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <a href="javascript:void(0)" title="XLS"><i class="fa fa-file-excel-o" aria-hidden="true"></i></a>
+                      &nbsp;
+                      <a href="javascript:void(0)" title="PDF"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </thead>
+          </table>
+        </p-header>
+        <p-column field="vin" header="Vin" [filter]="true" [sortable]="true"></p-column>
+        <p-column field="year" header="Year" [filter]="true" [sortable]="true"></p-column>
+        <p-column field="brand" header="Brand" [filter]="true" [sortable]="true"></p-column>
+        <p-column field="color" header="Color" [filter]="true" [sortable]="true"></p-column>
+        <p-footer>
+          Total de Registros: {{5}}
+        </p-footer>
+      </p-dataTable>
+      <div class="paginador-bottom">
+        <p class="form-group label-paginador" style="display: inline;">Resultados Por Página:</p>
+        <a *ngFor="let option of numberPages" style="display: inline;" (click)="setRows(option.numero)" class="link">
+          {{option.numero}}
+        </a>
+      </div>
+      <div class="pesquisa-paginador-bottom">
+        <p class="form-group label-paginador" style="display: inline;">Ir para a página: </p>
+        <input #page type="text" class="input-pesquisar-pagina form-control" (keyup.enter)="setPage(page.value)" />
+      </div>
+    </div>
+  </form>  
   </div>
-  <div class="pesquisa-paginador-top">
-    <p class="form-group label-paginador" style="display: inline;">Ir para a página: </p>
-    <input #pageTop type="text" class="input-pesquisar-pagina-top form-control" (keyup.enter)="setPage(pageTop.value)" />
-  </div>
-  <p-dataTable #dataTable [paginatorPosition]="'both'" [responsive]="true" [pageLinks]="10" [lazy]="false" [value]="cars" [rows]="10"
-    [paginator]="true" [style]="{'width':'100%'}" (onSort)="pageSort($event)" (onFilter)="pageSort($event)" (onPage)="pageChanged($event)">
-    <ng-template pTemplate="emptymessage">
-      Não há registros.
-    </ng-template>
-    <p-header>
-      <table class="table table-striped tabela" style="width:100%">
-        <caption style="width:100%">BASELINES</caption>
-        <thead>
-          <tr class="tabela-acoes">
-            <td colspan="12">
-              <div class="row">
-                <div class="col-md-12">
-                  <a href="javascript:void(0)" title="XLS"><i class="fa fa-file-excel-o" aria-hidden="true"></i></a>
-                  &nbsp;
-                  <a href="javascript:void(0)" title="PDF"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
-                </div>
-              </div>
-            </td>
-          </tr>
-        </thead>
-      </table>
-    </p-header>
-    <p-column field="vin" header="Vin" [filter]="true" [sortable]="true"></p-column>
-    <p-column field="year" header="Year" [filter]="true" [sortable]="true"></p-column>
-    <p-column field="brand" header="Brand" [filter]="true" [sortable]="true"></p-column>
-    <p-column field="color" header="Color" [filter]="true" [sortable]="true"></p-column>
-    <p-footer>
-      Total de Registros: {{5}}
-    </p-footer>
-  </p-dataTable>
-  <div class="paginador-bottom">
-    <p class="form-group label-paginador" style="display: inline;">Resultados Por Página:</p>
-    <a *ngFor="let option of numberPages" style="display: inline;" (click)="setRows(option.numero)" class="link">
-      {{option.numero}}
-    </a>
-  </div>
-  <div class="pesquisa-paginador-bottom">
-    <p class="form-group label-paginador" style="display: inline;">Ir para a página: </p>
-    <input #page type="text" class="input-pesquisar-pagina form-control" (keyup.enter)="setPage(page.value)" />
-  </div>
-</div>
+</section>
